@@ -50,105 +50,11 @@ public class GamePanel extends SContainer implements Observer{
 	public GamePanel(Dimension dim, Model mod){
 		super(dim);
 		this.controler = new Controler(mod);
-		//initPanel();
-		initPanel(mod);
+		initPanel();
+		//initPanel(mod);
 	}
 
 	protected void initPanel() {
-		// TODO Auto-generated method stub
-		JPanel leftContent = new JPanel();
-		JPanel rightContent = new JPanel();
-		JPanel centerContent = new JPanel();
-		//System.out.println("Size : " + this.dimension.getWidth());
-		//Dimension dim = new Dimension((int)(this.dimension.getWidth()/2), (int)this.dimension.getHeight());
-		
-		JPanel head = new JPanel();
-		JPanel foot = new JPanel();
-		
-			this.imageLabel1 = new ImageLabel();
-			this.imageLabel1.setPreferredSize(new Dimension(150, 150));
-			this.imageLabel1.setHorizontalAlignment(JLabel.CENTER);
-			//this.imageLabel1.setVerticalAlignment(JLabel.CENTER);
-		
-			this.imageLabel2 = new ImageLabel();
-			this.imageLabel2.setPreferredSize(new Dimension(150, 150));
-			this.imageLabel2.setHorizontalAlignment(JLabel.CENTER);
-			//this.imageLabel2.setVerticalAlignment(JLabel.CENTER);			
-		
-			this.imageLabel3 = new ImageLabel();
-			this.imageLabel3.setPreferredSize(new Dimension(150, 150));
-			this.imageLabel3.setVerticalAlignment(JLabel.CENTER);
-			
-		this.nbArtistes = new JLabel();
-		this.score = new JLabel(); 
-		
-		this.dimension = new Dimension(400, 530); 
-		centerContent.setPreferredSize(this.dimension);
-		centerContent.add(this.imageLabel1, BorderLayout.CENTER);
-		centerContent.add(this.imageLabel2, BorderLayout.CENTER);
-		centerContent.add(this.imageLabel3, BorderLayout.CENTER);
-		centerContent.setBackground(Color.white);
-		
-		leftContent.setPreferredSize(this.dimension);
-		
-		Dimension dim = new Dimension(410, 200);
-		head.setPreferredSize(new Dimension(410, 100));
-		
-		this.nbArtistes.setText("Nombre d'artistes  trouvés : 0");
-		this.nbArtistes.setPreferredSize(new Dimension(300, 20));
-		this.nbArtistes.setHorizontalAlignment(JLabel.CENTER);
-		this.nbArtistes.setFont(arial);
-		
-		head.add(this.nbArtistes, BorderLayout.NORTH);
-		
-		this.score.setText("Votre score actuel est de 0 point.");
-		this.score.setPreferredSize(new Dimension(300, 20));
-		this.score.setHorizontalAlignment(JLabel.CENTER);
-		this.score.setFont(arial);
-		head.add(this.score, BorderLayout.SOUTH);
-		head.setBackground(Color.white);
-		
-		this.titreChanson = new JLabel("Titre de la chanson : ");
-		this.titreChanson.setPreferredSize(new Dimension(400, 60));
-		this.titreChanson.setForeground(Color.blue);
-		this.titreChanson.setFont(comics30);
-		this.titreChanson.setHorizontalAlignment(JLabel.CENTER);
-		head.add(this.titreChanson);
-		
-		JPanel body = new JPanel();
-		body.setPreferredSize(dim);
-		body.setBackground(Color.white);
-
-		/*BoutonListener bl = new BoutonListener();
-		Dimension buttonDimension = new Dimension(150,50);
-		this.boutonStart = new JButton("Commencer");
-		this.boutonStart.addActionListener(bl);
-		boutonStart.setPreferredSize(buttonDimension);
-		body.add(boutonStart);*/
-		
-		/*
-		this.bouton = new JButton[26];
-		int i = 0;
-		for(char c : carac){
-			this.bouton[i] = new JButton(String.valueOf(c).toUpperCase());
-			bouton[i].addActionListener(bl);
-			bouton[i].setPreferredSize(buttonDimension);
-			body.add(bouton[i]);
-			i++;
-		}
-		*/
-		
-		leftContent.add(head, BorderLayout.NORTH);
-		leftContent.add(body, BorderLayout.WEST);
-		leftContent.setBackground(Color.white);
-		
-		this.panel.add(leftContent);
-		this.panel.add(rightContent);
-		this.panel.add(centerContent);
-	}
-
-	public void initPanel(Model mod){
-		this.model = mod;
 		JPanel leftContent = new JPanel();
 		JPanel rightContent = new JPanel();
 		JPanel centerContent = new JPanel();
@@ -267,7 +173,6 @@ public class GamePanel extends SContainer implements Observer{
 		this.panel.add(leftContent);
 		this.panel.add(rightContent);
 		this.panel.add(centerContent);
-		
 	}
 	
 	public void start(){		
