@@ -119,12 +119,13 @@ public class GamePanel extends SContainer implements Observer{
 		body.setPreferredSize(dim);
 		body.setBackground(Color.white);
 
-		BoutonListener bl = new BoutonListener();
+		/*BoutonListener bl = new BoutonListener();
 		Dimension buttonDimension = new Dimension(150,50);
 		this.boutonStart = new JButton("Commencer");
 		this.boutonStart.addActionListener(bl);
 		boutonStart.setPreferredSize(buttonDimension);
-		body.add(boutonStart);		
+		body.add(boutonStart);*/
+		
 		/*
 		this.bouton = new JButton[26];
 		int i = 0;
@@ -223,14 +224,14 @@ public class GamePanel extends SContainer implements Observer{
 		JPanel body = new JPanel();
 		body.setPreferredSize(dim);
 		body.setBackground(Color.white);
-		
+		/*
 		BoutonListener bl = new BoutonListener();
 		Dimension buttonDimension = new Dimension(150,50);
 		this.boutonStart = new JButton("Commencer");
 		this.boutonStart.addActionListener(bl);
 		boutonStart.setPreferredSize(buttonDimension);
 		body.add(boutonStart);
-		
+		*/
 		this.labelTitreChanson = new JLabel("\nTitre de la chanson : ");
 		this.labelTitreChanson.setPreferredSize(new Dimension(400, 60));
 		this.labelTitreChanson.setHorizontalAlignment(JLabel.CENTER);
