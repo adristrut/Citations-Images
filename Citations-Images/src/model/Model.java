@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 import observer.Observable;
 import observer.Observer;
@@ -12,11 +13,14 @@ public class Model implements Observable{
 	// Tableau d'images qui stocke les images choisies
 	private ImageIcon[] tabImages;
 	private Question quest;
+	private Partie part;
 	private String chanteurChoisi, chansonQuest;
+	private int nbQuestions = 0;
 
 	private ArrayList<Observer> listObserver = new ArrayList<Observer>();  
 
 	public Model() {
+		this.part = new Partie();
 		initModel();
 		//testModelCmd();	
 	}
@@ -53,6 +57,71 @@ public class Model implements Observable{
 	//On avertit les observateurs que les images ont été mise à jour
 	this.notifyObserver();
 	}	
+	
+public void assign(String s){
+		
+		if(this.quest.verifyQuestion(s) == true){
+			
+			if(this.nbQuestions == 10)
+			{
+				this.part.initPoint(this.quest.getNbErreurs());
+				this.part.setNombreQuest(this.part.getNombreQuest()+1);
+				JOptionPane.showMessageDialog(null,
+						                        "Vous avez trouvé le mot " + this.quest.getArtistQuest() +
+						                        " en " +
+						                        this.quest.getNombreCoups() + " coup" + ((this.quest.getNombreCoups() > 1) ? "s" : "") +
+												", avec " + this.quest.getNbErreurs() +
+						                        " erreur" + ((this.quest.getNbErreurs() > 1) ? "s" : "") + ".\n" +
+						                        "\tVous marquez donc " +
+						                        this.part.getPointMarque() + " pts.\n" +
+												"\tVotre avez maintenant un total de " +
+												this.part.getPoint() + " pts.",
+												"Résultat",
+												JOptionPane.INFORMATION_MESSAGE);
+				this.quest.initQuestion();
+				this.quest.setNbErreurs(0);
+				this.nbQuestions++;
+				
+				this.restartObserver();
+			}
+			
+			this.notifyObserver();
+		}
+		else{
+			this.quest.setNbErreurs(this.quest.getNbErreurs()+1);
+			this.notifyObserver();
+			
+			if(this.quest.getNbErreurs() == 3){
+				
+				JOptionPane.showMessageDialog(null,
+						                        "Le nom de l'artiste était :\n\t" +
+						                        this.quest.getChanRep(),
+												"Vous avez perdu", JOptionPane.NO_OPTION);
+				/*
+				if(this.scoreSerializer.isAccpeted(this.score)){
+					String nom = "";
+					nom  = (String)JOptionPane.showInputDialog(null,
+										"Entrez votre pseudonyme :", "Félicitations",
+										JOptionPane.QUESTION_MESSAGE);
+					
+					this.score.setNom(nom);
+					this.scoreSerializer.serialize();
+					this.scoreObserver();
+				}
+				else{
+					JOptionPane.showMessageDialog(null,
+				            "Désolé, vous avez perdu…\n" +
+				            "\n\n\tVous n'avez malheureusement pas assez de points pour enregistrer votre score.\n" +
+				            "Retentez votre chance à l'occasion !",
+				            "Vous avez perdu", JOptionPane.NO_OPTION);
+					this.accueilObserver();
+				}*/			
+			}
+			else{
+				this.notifyObserver();
+			}
+		}			
+	}
 	
 	public void testModelCmd()
 	{
@@ -144,7 +213,4 @@ public class Model implements Observable{
 	public void setQuest(Question quest) {
 		this.quest = quest;
 	}
-	
-	
-
 }

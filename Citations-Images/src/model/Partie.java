@@ -15,61 +15,78 @@ import observer.Observable;
 public class Partie {
 //public class Model implements Observable {	
 
-	// Tableau d'images qui stocke les images choisies
-	private ImageIcon[] tabImages;
-	// Tableau de chaine de caractères contenant les artistes
-	private String[][] chanteurs = {
-			{ "Claude François", "Alain Souchon", "Johnny Hallyday","Jacques Brel", "Julien Clerc", "Serge Gainsbourg","Edith Piaf", "Georges Brassens", "Jacques Dutronc","Charles Aznavour", "Daniel Balavoine", "Patrick Bruel",	"Renaud", "Patricia Kaas" },
-			{ "Comme d'habitude","Foule sentimentale","Les portes du pénitencier", "Ne me quitte pas","Mélissa", "Le poinçonneur des Lilas","Je ne regrette rien","Les copains d'abord", "Paris s'éveille", "Les comédiens","Le chanteur", "Place des grands hommes","Mistral gagnant", "Mon mec à moi" } };
+	  private String nom;
+	  private int point, pointMarque;
+	  private int nbreQuest;
 
+	  public Partie(){
+		    nom = new String("........");
+		    point = 0;
+		    nbreQuest = 0;
+	  }
 
-	private String chanson;
+	  public Partie(String nom, int point, int numQuest){
+		  nom = nom;
+		  point = point;
+		  nbreQuest = numQuest;
+	  }
 
-	//public Model() {
-	public Partie(){
-		initPartie();
-	}
+	  public int getPoint(){
+		  return point;
+	  }
+	  
+	  public void initPoint(int nbErreur){
+		  switch (nbErreur){
 
-	public void initPartie(){
-		// sélection aléatoire de l'artiste
-		this.chanson = "";
-		Random r = new Random();
-		int valeur1 = r.nextInt(14), valeur2, valeur3;
-		this.chanson = chanteurs[1][valeur1];
-		System.out.println("Chanson du chanteur mystère : "+chanteurs[1][valeur1]+"");
-		System.out.println("Le chanteur mystère est : "+ chanteurs[0][valeur1] + "");
-		do{
-			valeur2 = r.nextInt(13);
-		}while(valeur2 == valeur1);
-		do{
-			valeur3 = r.nextInt(13);
-		}while((valeur3 == valeur1)||(valeur3 == valeur2));
+		      case 0:
+		          this.point += 1;
+		          this.pointMarque = 1;
+		          break;
 		
-		//initialisation des images contenues dans le tableau
-		this.tabImages = new ImageIcon[3];
-	this.tabImages[0] = new ImageIcon("Images/"+this.chanteurs[0][valeur1]+".jpeg");
-	this.tabImages[1] = new ImageIcon("Images/"+this.chanteurs[0][valeur2]+".jpeg");
-	this.tabImages[2] = new ImageIcon("Images/"+this.chanteurs[0][valeur3]+".jpeg");
-	
-	//this.notifyObserver();
-	}	
-	/*
-	@Override
-	public void addObserver(Observer obs) {
-		// TODO Auto-generated method stub
+		      case 1:
+		    	  this.point += 1;
+		    	  this.pointMarque = 1;
+		          break;
+		
+		      case 2:
+		    	  this.point += 0;
+		    	  this.pointMarque = 0;
+		          break;
+		
+		      case 3:
+		    	  this.point += 0;
+		    	  this.pointMarque = 0;
+		          break;
+		
+		      default:
+		    	  this.point += 0;
+
+	      }
+
+	  }
+
+	  public String getNom(){
+		  return nom;
+	  }
+	  
+	  public void setNom(String nom){
+		  this.nom = (nom != null) ? nom : "........";
+	  }
+
+	  public void setNombreQuest(int nbre){
+		  this.nbreQuest = nbre;
+	  }
+	  
+	  public int getNombreQuest(){
+		  return this.nbreQuest;
+	  }
+	  
+	  public String toString(){
+		  return " "+nom+" : "+point+" pts ("+nbreQuest+" question"+((nbreQuest > 1) ? "s" : "")+")";	  
+	  }
+
+	  public int getPointMarque(){
+		  return pointMarque;
+	  }
 
 	}
-
-	@Override
-	public void notifyObserver() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void deleteObserver() {
-		// TODO Auto-generated method stub
-
-	}
-	 */
-}

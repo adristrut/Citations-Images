@@ -6,6 +6,7 @@ public class Question {
 
 
 	private int nbErreurs = 0;
+	private int nbreCoups = 0;
 	private String chansonRep;
 	private String[] artistQuest;
 	// Tableau de chaine de caractères contenant les artistes
@@ -41,6 +42,7 @@ public class Question {
 			artistQuest[2] = ListSingerSongs[0][valeur3];
 		} while ((valeur3 == valeur1) || (valeur3 == valeur2));
 
+		this.nbreCoups = 0;
 	}
 
 	public boolean verifyQuestion(String s) {
@@ -63,6 +65,7 @@ public class Question {
 			nbErreurs++;
 			bo = false;
 		}
+		++this.nbreCoups;
 		return bo;
 	}
 
@@ -96,6 +99,10 @@ public class Question {
 
 	public void setListSingerSongs(String[][] listSingerSongs) {
 		ListSingerSongs = listSingerSongs;
+	}
+	
+	public int getNombreCoups() {
+		return nbreCoups;
 	}
 
 }
