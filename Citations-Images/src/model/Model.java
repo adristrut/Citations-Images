@@ -15,7 +15,7 @@ public class Model implements Observable{
 	private Question quest;
 	private Partie part;
 	private String chanteurChoisi, chansonQuest;
-	private int nbQuestions = 0;
+	private int nbQuestions = 1;
 
 	private ArrayList<Observer> listObserver = new ArrayList<Observer>();  
 
@@ -41,6 +41,7 @@ public class Model implements Observable{
 	
 	//public void startModel(){
 	public void initModel(){
+		System.out.println("Je créé une nouvelle instance du modèle !");
 		quest = new Question();
 		String tab[] = new String[3];
 		chansonQuest = this.quest.getChanRep();
@@ -60,28 +61,35 @@ public class Model implements Observable{
 	
 public void assign(String s){
 		
-		if(this.quest.verifyQuestion(s) == true){
+		int i = 0;
+		i = s.lastIndexOf(".");
+		
+		chanteurChoisi = s.substring(7,i);
+		System.out.println("Traitement du choix de l'Utilisateur : "+chanteurChoisi);
+		
+		if(this.quest.verifyQuestion(chanteurChoisi) == true){
 			
-			if(this.nbQuestions == 10)
+			if(this.nbQuestions <= 10)
 			{
 				this.part.initPoint(this.quest.getNbErreurs());
 				this.part.setNombreQuest(this.part.getNombreQuest()+1);
 				JOptionPane.showMessageDialog(null,
-						                        "Vous avez trouvé le mot " + this.quest.getArtistQuest() +
-						                        " en " +
-						                        this.quest.getNombreCoups() + " coup" + ((this.quest.getNombreCoups() > 1) ? "s" : "") +
+						                        "Vous avez trouvé en "+this.quest.getNombreCoups()+" "+" coup" + ((this.quest.getNombreCoups() > 1) ? "s" : "\n") +
+						                        "que l'artiste de la chanson était << " + this.quest.getArtistQuest()[0] +
+						                        " >> " +
 												", avec " + this.quest.getNbErreurs() +
 						                        " erreur" + ((this.quest.getNbErreurs() > 1) ? "s" : "") + ".\n" +
 						                        "\tVous marquez donc " +
 						                        this.part.getPointMarque() + " pts.\n" +
 												"\tVotre avez maintenant un total de " +
 												this.part.getPoint() + " pts.",
-												"Résultat",
+												"Résultat : Extrait n°"+this.nbQuestions+"",
 												JOptionPane.INFORMATION_MESSAGE);
-				this.quest.initQuestion();
+				//this.quest.initQuestion();
 				this.quest.setNbErreurs(0);
 				this.nbQuestions++;
 				
+				initModel();
 				this.restartObserver();
 			}
 			

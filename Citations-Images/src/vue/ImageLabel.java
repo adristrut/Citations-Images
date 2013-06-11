@@ -9,8 +9,6 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JLabel;
 
-import vue.GamePanel.ImageListener;
-
 public class ImageLabel extends JLabel{
 
 	private String imagePath = "Images/visage-inconnu.jpg";

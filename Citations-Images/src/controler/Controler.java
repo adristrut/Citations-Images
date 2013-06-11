@@ -1,9 +1,16 @@
 package controler;
 
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
 
 import model.Model;
 import observer.Observable;
+import vue.Fenetre;
+import vue.GamePanel;
+import vue.ImageLabel;
 
 /* Le Contrôleur est chargé de faire le lien entre notre vue et notre modèle. 
  * Que doit faire notre contrôleur? 
@@ -21,22 +28,21 @@ import observer.Observable;
  * Celui-ci mis à jour, 
  * les données à afficher dans la vue seront envoyées via l'implémentation du pattern observer entre notre modèle et notre vue.
  */
+
 public class Controler{
 	
-	  protected Model model;
-	  protected String choixUser;
-	  //protected String operateur = "", nbre = "";
-	  //protected ArrayList<String> listOperateur = new ArrayList<String>();
-
+	//Référencement d'un objet environnement
+	  private Model objMod;
+	  
 	  public Controler(Observable mod){
+	    this.objMod = (Model) mod;
 	    //this.choixUser = this.model.getQuest().getChanRep();
 	    //System.out.println("Je suis dans le controleur"+choixUser+"");
-	    this.model = (Model) mod;
 	   }
 	    
 	  //Efface
 	  public void reset(){
-	    this.model.reset();
+	    this.objMod.reset();
 	  }
 	/*
 	  //Méthode de contrôle
@@ -100,7 +106,18 @@ public class Controler{
 
 	public void control(String text) {
 		// TODO Auto-generated method stub
-		this.model.getQuest().getChanRep();
+		this.objMod.getQuest().setChanRep(text);
+		if(this.objMod.getQuest().verifyQuestion(text) == true)
+		{
+			System.out.println("Je suis dans le controleur !");
+			JOptionPane.showMessageDialog(null,
+                    "Bravo ! Vous avez trouvé le bon chanteur !",
+					"Résultat",
+					JOptionPane.INFORMATION_MESSAGE);			
+		}
+	    //System.out.println("Je suis dans le controleur"+choixUser+"");
+		//this.choixUser = text;
+		//model.assign(choixUser);
 		
 	}
 }

@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import controler.Controler;
+import controler.ImageListener;
 import model.Model;
 
 import observer.Observable;
@@ -49,12 +50,15 @@ public class GamePanel extends SContainer implements Observer{
 	
 	public GamePanel(Dimension dim, Model mod){
 		super(dim);
-		this.controler = new Controler(mod);
-		initPanel();
-		//initPanel(mod);
+		this.model = mod;
+		//this.controler = new Controler(mod, this);
+		//initPanel();
+		initPanel(this.model);
 	}
 
-	protected void initPanel() {
+	protected void initPanel(Model mod) {
+		this.model = mod;
+		System.out.println("Je suis dans le GamePanel et la rep à la question est : "+this.model.getQuest().getArtistQuest()[0]);
 		JPanel leftContent = new JPanel();
 		JPanel rightContent = new JPanel();
 		JPanel centerContent = new JPanel();
@@ -149,7 +153,7 @@ public class GamePanel extends SContainer implements Observer{
 		body.add(this.labelTitreChanson);
 		body.add(this.titreChanson);
 		
-		ImageListener il = new ImageListener();
+		ImageListener il = new ImageListener(this, this.model);
 		imageLabel1.addMouseListener(il);
 		imageLabel2.addMouseListener(il);
 		imageLabel3.addMouseListener(il);
@@ -218,12 +222,11 @@ public class GamePanel extends SContainer implements Observer{
 		}		
 	}
 	
-	class ImageListener implements MouseListener{
-
+/*	class ImageListener implements MouseListener{
 		@Override
 		public void mouseClicked(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			//controler.control(((ImageLabel)arg0.getSource()).getText());
+			controler.control(((ImageLabel)arg0.getSource()).getText());
 			System.out.println("Label de l'image cliquée : "+((ImageLabel)arg0.getSource()).getText());
 			if(((ImageLabel) arg0.getSource()).getText() == imageLabel1.getText())
 			{
@@ -232,7 +235,7 @@ public class GamePanel extends SContainer implements Observer{
                         "Bravo ! Vous avez trouvé le bon chanteur !",
 						"Résultat",
 						JOptionPane.INFORMATION_MESSAGE);
-/*				JOptionPane.showMessageDialog(null,
+	JOptionPane.showMessageDialog(null,
                         "Vous avez trouvé le mot " + this.mot.getWord() +
                         " en " +
                         this.mot.getNombreCoup() + " coup" + ((this.mot.getNombreCoup() > 1) ? "s" : "") +
@@ -244,7 +247,7 @@ public class GamePanel extends SContainer implements Observer{
 						this.score.getPoint() + " pts.",
 						"Résultat",
 						JOptionPane.INFORMATION_MESSAGE);
-*/			}
+			}
 			
 		}
 
@@ -267,15 +270,21 @@ public class GamePanel extends SContainer implements Observer{
 		}
 
 		@Override
-		public void mouseReleased(MouseEvent arg0) {
+		public void mouseReleased(MouseEvent arg0) {	
 			// TODO Auto-generated method stub
 			
 		}		
-	}
+	}*/
 
 	@Override
 	public void update(String nomChanson, ImageIcon imageIcon,
 			ImageIcon imageIcon2, ImageIcon imageIcon3) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void initPanel() {
 		// TODO Auto-generated method stub
 		
 	}	

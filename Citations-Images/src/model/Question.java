@@ -48,23 +48,26 @@ public class Question {
 	public boolean verifyQuestion(String s) {
 
 		boolean bo = false;
-		if(artistQuest[0]==s)
+		System.out.println("Nom de l'artiste comparé avec le choix du User dans le verify : "+artistQuest[0]);
+		if(s.compareTo(artistQuest[0])==0)
 		{
 			System.out.println("Bonne réponse");
 			nbErreurs = 0;
 			bo = true;
 		}
-		else if(artistQuest[0]!=s && nbErreurs==2)
+		else if(s.compareTo(artistQuest[0])!=0 && nbErreurs==2)
 		{
 			System.out.println("Mauvaise réponse. La bonne réponse était " + this.chansonRep +" de "+ this.artistQuest[0]);
 			nbErreurs = 0;
 			bo = true;
 		}
-		else {
+		else if(s.compareTo(artistQuest[0])!=0 && nbErreurs<2){
 			System.out.println("Mauvaise réponse. Essaye encore !");
 			nbErreurs++;
 			bo = false;
 		}
+		else
+			System.out.println("Erreur ! Le test booléen ne fonctionne pas lors de la vérification de la réponse.");
 		++this.nbreCoups;
 		return bo;
 	}
