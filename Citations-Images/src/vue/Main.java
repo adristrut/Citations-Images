@@ -10,12 +10,11 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		//Observable model = new Model();
+		// Observable model = new Model();
 
-		//Model model = new Model();
-		//Fenetre fen = new Fenetre(model);
+		// Model model = new Model();
+		// Fenetre fen = new Fenetre(model);
 		Fenetre fen = new Fenetre();
 		fen.setVisible(true);
 	}
 }
-
