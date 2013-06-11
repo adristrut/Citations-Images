@@ -203,8 +203,15 @@ public class GamePanel extends SContainer implements Observer {
 				play= new AbstractAction() {
 		
 					public void actionPerformed(ActionEvent arg0) {
+						//
+						chooser.setSelectedFile(new File("Wave/RENAUD.wav"));
+						audioFile=chooser.getSelectedFile();
+						player.setFile(audioFile);	
+	                   player.init();
+	                   title.setText("Fichier en cours de lecture: "+ audioFile.getName());
+	                   foot.paintAll(foot.getGraphics());
 						
-							player.init();
+						//	player.init();
 							audioPlayerThread = new Thread(player);
 							audioPlayerThread.start();
 		                  
@@ -245,6 +252,7 @@ public class GamePanel extends SContainer implements Observer {
 					}
 				};
 				load.putValue(Action.SMALL_ICON, new ImageIcon("Images/load.png"));
+				
 				
 				JToolBar toolbar = new JToolBar();
 				toolbar.add(load);
