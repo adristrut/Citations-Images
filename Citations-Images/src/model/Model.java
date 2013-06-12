@@ -164,7 +164,7 @@ public class Model implements Observable {
 		// System.out.println(tabImages[1]);
 		// System.out.println(tabImages[2]);
 		for (Observer obs : this.listObserver)
-			obs.update(this.chansonQuest, "" + this.tabImages[0] + "", "" 
+			obs.update(this.chansonQuest, this.quest.getArtistQuest()[0], "" + this.tabImages[0] + "", "" 
 		+ this.tabImages[1] + "", "" + this.tabImages[2] + "", this.part.getPoint(), this.getNbQuestions());
 		//	obs.update(this.chansonQuest, "" + this.tabImages[0] + "", ""
 			//		+ this.tabImages[1] + "", "" + this.tabImages[2] + "");

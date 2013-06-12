@@ -38,7 +38,7 @@ public class GamePanel extends SContainer implements Observer {
 	 * private int pts = 0; private ImageIcon img[]; private String mot; private
 	 * JLabel nombreArt, score, motSecret; private JButton bouton[];
 	 */
-	private String mot;
+	private String mot, nomArtiste;
 	private JLabel nbArtistes, score, titreChanson, labelTitreChanson;
 	private ImageLabel imageLabel1;
 	private ImageLabel imageLabel2;
@@ -166,7 +166,7 @@ public class GamePanel extends SContainer implements Observer {
 
 		final JPanel foot = new JPanel(new BorderLayout());
 		foot.setPreferredSize(new Dimension(400, 120));
-		foot.setBackground(Color.pink);
+		foot.setBackground(Color.orange);
 		//this.ap = new AudioPlayerGUI();
 		//this.ap.setPreferredSize(new Dimension(400, 100));
 		//foot.add(ap);
@@ -199,16 +199,16 @@ public class GamePanel extends SContainer implements Observer {
 				};
 				stop.putValue(Action.SMALL_ICON, new ImageIcon("Images/stop.png"));		
 				
-				
+				this.nomArtiste = "";
 				play= new AbstractAction() {
 		
 					public void actionPerformed(ActionEvent arg0) {
 						//
-						chooser.setSelectedFile(new File("Wave/RENAUD.wav"));
+						chooser.setSelectedFile(new File("Wave/"+nomArtiste+".wav"));
 						audioFile=chooser.getSelectedFile();
 						player.setFile(audioFile);	
-	                   player.init();
-	                   title.setText("Fichier en cours de lecture: "+ audioFile.getName());
+						player.init();
+	                   //title.setText("Fichier en cours de lecture: "+ audioFile.getName());
 	                   foot.paintAll(foot.getGraphics());
 						
 						//	player.init();
@@ -255,13 +255,13 @@ public class GamePanel extends SContainer implements Observer {
 				
 				
 				JToolBar toolbar = new JToolBar();
-				toolbar.add(load);
+				//toolbar.add(load);
 				toolbar.add(play);
 				toolbar.add(stop);
 		
 				foot.add(toolbar, BorderLayout.NORTH);
-		       title=new JLabel("Aucun titre en cours de lecture");
-		       foot.add(title,BorderLayout.CENTER);
+		       //title=new JLabel("Aucun titre en cours de lecture");
+		       //foot.add(title,BorderLayout.CENTER);
 				//frame.setContentPane(contentPane);
 				//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				//frame.pack();
@@ -358,6 +358,19 @@ public class GamePanel extends SContainer implements Observer {
 			String img3Path) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void update(String nomChanson, String nomChanteur, String img1Path,
+			String img2Path, String img3Path, int pts, int nbArtist) {
+		// TODO Auto-generated method stub
+		this.titreChanson.setText(nomChanson);
+		this.nomArtiste = nomChanteur;
+		this.imageLabel1.setImagePath(img1Path);
+		this.imageLabel2.setImagePath(img2Path);
+		this.imageLabel3.setImagePath(img3Path);
+		this.score.setText("Votre score actuel est de " +pts+" point"+((pts > 1) ? "s" : "")+".");
+		this.nbArtistes.setText("Question n°" +nbArtist);
 	}
 }
 

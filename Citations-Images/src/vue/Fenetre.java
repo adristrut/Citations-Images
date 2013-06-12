@@ -290,4 +290,11 @@ public class Fenetre extends JFrame implements Observer {
 		
 	}
 
+	@Override
+	public void update(String nomChanson, String nomChanteur, String img1Path,
+			String img2Path, String img3Path, int pts, int nbArtist) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
