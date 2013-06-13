@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Question {
 
-	private int nbErreurs = 1;
+	private int nbErreurs = 0;
 	private int nbreCoups = 0;
 	private String chansonRep;
 	private String[] artistQuest;
@@ -64,12 +64,12 @@ public class Question {
 			System.out.println("Bonne réponse");
 			//nbErreurs = 0;
 			bo = true;
-		} else if (s.compareTo(artistQuest[0]) != 0 && nbErreurs == 3) {
+		} else if (s.compareTo(artistQuest[0]) != 0 && nbErreurs == 2) {
 			System.out.println("Mauvaise réponse. La bonne réponse était "
 					+ this.artistQuest[0] + " de " + this.artistQuest[0]);
 			//nbErreurs = 0;
 			bo = false;
-		} else if (s.compareTo(artistQuest[0]) != 0 && nbErreurs < 3) {
+		} else if (s.compareTo(artistQuest[0]) != 0 && nbErreurs < 2) {
 			System.out.println("Mauvaise réponse. Essaye encore !");
 			//nbErreurs++;
 			bo = false;

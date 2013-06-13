@@ -36,6 +36,10 @@ public class Fenetre extends JFrame implements Observer {
 	private JMenu apropos = null;
 	private JMenuItem apropos2 = null;
 	private JMenuItem rules = null;
+	private JMenu customize = null;
+	private JMenuItem ajouterEntree = null;
+	private JMenuItem ajouterChanteurChanson = null;
+
 	private JPanel conteneur = new JPanel();
 	private Dimension size;
 	// private Observable model;
@@ -122,7 +126,7 @@ public class Fenetre extends JFrame implements Observer {
 	 */
 	public Fenetre() {
 		this.setTitle("Citations-Images");
-		this.setSize(1000, 500); // Taille(Largeur x Hauteur)
+		this.setSize(1000, 400); // Taille(Largeur x Hauteur)
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setResizable(true);
@@ -213,7 +217,7 @@ public class Fenetre extends JFrame implements Observer {
 				JOptionPane
 						.showMessageDialog(
 								null,
-								"Créateur : Adrien\nLicence : Freeware\nCopyright : Adrien",
+								"Créateur : Adrien\nLicence : Freeware\nCopyright : Sophie LEBFEVRE Orthophoniste",
 								"Informations", JOptionPane.NO_OPTION);
 				conteneur.removeAll();
 				conteneur.add(new AccueilPanel(size).getPanel());
@@ -227,7 +231,49 @@ public class Fenetre extends JFrame implements Observer {
 		apropos.add(rules);
 		apropos.add(apropos2);
 
+		customize = new JMenu("Personnaliser");
+		apropos.setMnemonic('o');
+		// apropos.addActionListener(this);
+
+		ajouterEntree = new JMenuItem("Ajouter une Entrée");
+		ajouterEntree.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				conteneur.removeAll();
+				conteneur.add(new AjoutArtistTitlePanel(size).getPanel(),
+						BorderLayout.CENTER);
+				conteneur.revalidate();
+				model1.reset();
+			}
+		});
+
+		ajouterChanteurChanson = new JMenuItem("Ajouter un Artiste & un titre");
+		ajouterChanteurChanson.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String artisteEtTitre = (String) JOptionPane.showInputDialog(null,
+						// AppliJOptionPane.this,
+						"Ajouter un artiste avec une nouvelle chanson : \n", "Ajouter un artiste avec un nouveau titre",
+						JOptionPane.QUESTION_MESSAGE, null,// new
+															// ImageIcon(getClass().getResource("logo.png")),
+						null, // c'est ouvert !!!
+						"Nom de l'Artiste.Titre de la chanson"); // valeur initiale
+				if ((artisteEtTitre != null) && (artisteEtTitre.length() > 0))
+					// model1.getQuest().getListSingerSongs()[model1.getQuest().getListSingerSongs().length][model1.getQuest().getListSingerSongs().length]
+					model1.setChanteurChoisi("\"un plus un = ...\" "
+							+ artisteEtTitre + "!");
+				conteneur.removeAll();
+				conteneur.add(new AccueilPanel(size).getPanel());
+				conteneur.revalidate();
+				// model.reset(); modif
+				// "Suppression du passage en paramètre d'un objet du type Observable"
+				// model1.reset();
+			}
+		});
+
+		customize.add(ajouterEntree);
+		customize.add(ajouterChanteurChanson);
+
 		menu.add(fichier);
+		menu.add(customize);
 		menu.add(apropos);
 
 		this.conteneur.setPreferredSize(this.size);
@@ -236,15 +282,17 @@ public class Fenetre extends JFrame implements Observer {
 		this.setContentPane(this.conteneur);
 
 		this.setJMenuBar(menu);
-		
+
 		try {
-			   UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-			   SwingUtilities.updateComponentTreeUI(this);
-			   //force chaque composant de la fenêtre à appeler sa méthode updateUI
-			} catch (InstantiationException e) {
-			} catch (ClassNotFoundException e) {
-			} catch (UnsupportedLookAndFeelException e) {
-			} catch (IllegalAccessException e) {}
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+			SwingUtilities.updateComponentTreeUI(this);
+			// force chaque composant de la fenêtre à appeler sa méthode
+			// updateUI
+		} catch (InstantiationException e) {
+		} catch (ClassNotFoundException e) {
+		} catch (UnsupportedLookAndFeelException e) {
+		} catch (IllegalAccessException e) {
+		}
 	}
 
 	/*
@@ -287,14 +335,14 @@ public class Fenetre extends JFrame implements Observer {
 	public void update(String nomChanson, String img1Path, String img2Path,
 			String img3Path, int pts, int nbArtist) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void update(String nomChanson, String nomChanteur, String img1Path,
 			String img2Path, String img3Path, int pts, int nbArtist) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

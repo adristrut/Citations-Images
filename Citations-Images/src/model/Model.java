@@ -115,23 +115,38 @@ public class Model implements Observable {
 						JOptionPane.INFORMATION_MESSAGE);
 				// this.quest.initQuestion();
 				this.quest.setNbErreurs(0);
-				initModel();
-				this.restartObserver();
-				this.nbQuestions++;
+				if (this.nbQuestions < 10) {
+					initModel();
+					this.restartObserver();
+					this.nbQuestions++;	
+				}
+				else if(this.nbQuestions == 10) {
+					this.accueilObserver();
+				}
 			}
 			this.notifyObserver();
 		} else {
 			System.out.println(this.quest.getNbErreurs());
 			this.quest.setNbErreurs(this.quest.getNbErreurs() + 1);
-			this.notifyObserver();
+			//this.notifyObserver();
 
-			if (this.quest.getNbErreurs() == 3) {
+			if (this.quest.getNbErreurs() == 2) {
 
 				JOptionPane.showMessageDialog(
 						null,
 						"Le chanteur était "
 								+ this.quest.getArtistQuest()[0], "Vous avez perdu",
 						JOptionPane.NO_OPTION);
+
+				this.quest.setNbErreurs(0);
+				if (this.nbQuestions < 10) {
+					initModel();
+					this.restartObserver();
+					this.nbQuestions++;	
+				}
+				else if(this.nbQuestions == 10) {
+					this.accueilObserver();
+				}
 				/*
 				 * if(this.scoreSerializer.isAccpeted(this.score)){ String nom =
 				 * ""; nom = (String)JOptionPane.showInputDialog(null,
@@ -155,6 +170,7 @@ public class Model implements Observable {
 						JOptionPane.NO_OPTION);
 				this.notifyObserver();
 			}
+			this.notifyObserver();
 		}
 	}
 
@@ -221,7 +237,8 @@ public class Model implements Observable {
 	@Override
 	public void accueilObserver() {
 		// TODO Auto-generated method stub
-
+			for(Observer obs : this.listObserver)
+				obs.accueil();
 	}
 
 	public String getChanteurChoisi() {

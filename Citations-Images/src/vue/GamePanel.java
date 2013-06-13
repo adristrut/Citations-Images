@@ -104,7 +104,7 @@ public class GamePanel extends SContainer implements Observer {
 		this.nbArtistes = new JLabel();
 		this.score = new JLabel();
 
-		this.dimension = new Dimension(650, 500);
+		this.dimension = new Dimension(650, 400);
 		rightContent.setPreferredSize(this.dimension);
 
 			rightContent.add(this.imageLabel1, BorderLayout.CENTER);
@@ -113,9 +113,9 @@ public class GamePanel extends SContainer implements Observer {
 			
 		rightContent.setBackground(Color.white);
 
-		Dimension dim = new Dimension(300, 500);
+		Dimension dim = new Dimension(300, 400);
 		leftContent.setPreferredSize(dim);
-		head.setPreferredSize(new Dimension(350, 100));
+		head.setPreferredSize(new Dimension(350, 50));
 
 		//this.nbArtistes.setText("Nombre d'artistes  trouvés : " + this.model.getPart().getNombreQuest()+ "");
 		this.nbArtistes.setText("Question n°1");
@@ -134,7 +134,7 @@ public class GamePanel extends SContainer implements Observer {
 		head.setBackground(Color.white);
 
 		JPanel body = new JPanel();
-		body.setPreferredSize(new Dimension(400, 150));
+		body.setPreferredSize(new Dimension(400, 100));
 		body.setBackground(Color.white);
 		//JCheckBox casePasCochee = new JCheckBox("Une case `a cocher ");
 		afficheTitre = new JCheckBox("Afficher le titre de la chanson", false);
@@ -176,7 +176,7 @@ public class GamePanel extends SContainer implements Observer {
 
 		
 		final JPanel foot = new JPanel(new BorderLayout());
-		foot.setPreferredSize(new Dimension(400, 100));
+		foot.setPreferredSize(new Dimension(200, 50));
 //		foot.setBackground(Color.orange);
 		
 		//this.ap = new AudioPlayerGUI();
@@ -256,8 +256,10 @@ public class GamePanel extends SContainer implements Observer {
 				
 				JToolBar toolbar = new JToolBar();
 				//toolbar.add(load);
+				toolbar.setSize(200, 50);
 				toolbar.add(play);
 				toolbar.add(stop);
+				//title.setText("Fichier en cours de lecture");
 				//toolbar.setBackground(Color.white);
 				toolbar.setFloatable(false);
 		
