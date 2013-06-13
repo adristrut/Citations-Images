@@ -1,6 +1,8 @@
 package model;
 
+import java.awt.BorderLayout;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -50,10 +52,27 @@ public class Model implements Observable {
 		System.out.println(tab[2]);
 		// initialisation des images contenues dans le tableau
 		this.tabImages = new ImageIcon[3];
+		Random r = new Random();
+		int ordreAffichage = r.nextInt(3);
+		System.out.println(ordreAffichage);
+		if (ordreAffichage == 1) {
+			this.tabImages[0] = new ImageIcon("Images/" + tab[0] + ".jpg");
+			this.tabImages[1] = new ImageIcon("Images/" + tab[1] + ".jpg");
+			this.tabImages[2] = new ImageIcon("Images/" + tab[2] + ".jpg");
+		} else if (ordreAffichage == 2) {
+			this.tabImages[2] = new ImageIcon("Images/" + tab[0] + ".jpg");
+			this.tabImages[0] = new ImageIcon("Images/" + tab[1] + ".jpg");
+			this.tabImages[1] = new ImageIcon("Images/" + tab[2] + ".jpg");
+		} else {
+			this.tabImages[1] = new ImageIcon("Images/" + tab[0] + ".jpg");
+			this.tabImages[2] = new ImageIcon("Images/" + tab[1] + ".jpg");
+			this.tabImages[0] = new ImageIcon("Images/" + tab[2] + ".jpg");
+		}
+		/*
 		this.tabImages[0] = new ImageIcon("Images/" + tab[0] + ".jpg");
 		this.tabImages[1] = new ImageIcon("Images/" + tab[1] + ".jpg");
 		this.tabImages[2] = new ImageIcon("Images/" + tab[2] + ".jpg");
-
+		*/
 		// On avertit les observateurs que les images ont été mise à jour
 		this.notifyObserver();
 	}
@@ -66,7 +85,7 @@ public class Model implements Observable {
 		chanteurChoisi = s.substring(7, i);
 		System.out.println("Traitement du choix de l'Utilisateur : "
 				+ chanteurChoisi);
-
+		
 		if (this.quest.verifyQuestion(chanteurChoisi) == true) {
 
 			if (this.nbQuestions <= 10) {
@@ -96,9 +115,9 @@ public class Model implements Observable {
 						JOptionPane.INFORMATION_MESSAGE);
 				// this.quest.initQuestion();
 				this.quest.setNbErreurs(0);
-				this.nbQuestions++;
 				initModel();
 				this.restartObserver();
+				this.nbQuestions++;
 			}
 
 			this.notifyObserver();

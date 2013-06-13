@@ -122,7 +122,7 @@ public class Fenetre extends JFrame implements Observer {
 	 */
 	public Fenetre() {
 		this.setTitle("Citations-Images");
-		this.setSize(900, 400); // Taille(Largeur x Hauteur)
+		this.setSize(1000, 600); // Taille(Largeur x Hauteur)
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setResizable(true);
@@ -231,7 +231,7 @@ public class Fenetre extends JFrame implements Observer {
 		menu.add(apropos);
 
 		this.conteneur.setPreferredSize(this.size);
-		this.conteneur.setBackground(Color.darkGray);
+		this.conteneur.setBackground(Color.white);
 		this.conteneur.add(new AccueilPanel(this.size).getPanel());
 		this.setContentPane(this.conteneur);
 

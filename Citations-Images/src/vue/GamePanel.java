@@ -16,6 +16,7 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -60,7 +61,8 @@ public class GamePanel extends SContainer implements Observer {
 	private JPanel contentPane;	
 	private JFileChooser chooser;	
 	private File audioFile;	
-    private JLabel title;	
+    private JLabel title;
+	private JCheckBox afficheTitre;
 
 	
 	public GamePanel(Dimension dim, Model mod) {
@@ -78,55 +80,42 @@ public class GamePanel extends SContainer implements Observer {
 						+ this.model.getQuest().getArtistQuest()[0]);
 		JPanel leftContent = new JPanel();
 		JPanel rightContent = new JPanel();
-		JPanel centerContent = new JPanel();
 		// System.out.println("Size : " + this.dimension.getWidth());
 		// Dimension dim = new Dimension((int)(this.dimension.getWidth()/2),
 		// (int)this.dimension.getHeight());
 
 		JPanel head = new JPanel();
-
+		
 		this.imageLabel1 = new ImageLabel();
 		this.imageLabel1.setPreferredSize(new Dimension(150, 150));
-		this.imageLabel1.setHorizontalAlignment(JLabel.CENTER);
-		// this.imageLabel1.setVerticalAlignment(JLabel.CENTER);
+		//this.imageLabel1.setHorizontalAlignment(JLabel.CENTER);
+		//this.imageLabel1.setVerticalAlignment(JLabel.CENTER);
 
 		this.imageLabel2 = new ImageLabel();
 		this.imageLabel2.setPreferredSize(new Dimension(150, 150));
-		this.imageLabel2.setHorizontalAlignment(JLabel.CENTER);
-		// this.imageLabel2.setVerticalAlignment(JLabel.CENTER);
+		//this.imageLabel2.setHorizontalAlignment(JLabel.CENTER);
+		//this.imageLabel2.setVerticalAlignment(JLabel.CENTER);
 
 		this.imageLabel3 = new ImageLabel();
 		this.imageLabel3.setPreferredSize(new Dimension(150, 150));
-		this.imageLabel3.setVerticalAlignment(JLabel.CENTER);
-
+		//this.imageLabel3.setHorizontalAlignment(JLabel.CENTER);
+		//this.imageLabel3.setVerticalAlignment(JLabel.CENTER);
+		
 		this.nbArtistes = new JLabel();
 		this.score = new JLabel();
 
-		this.dimension = new Dimension(400, 530);
-		centerContent.setPreferredSize(this.dimension);
+		this.dimension = new Dimension(500, 600);
+		rightContent.setPreferredSize(this.dimension);
 
-		Random r = new Random();
-		ordreAffichage = r.nextInt(3);
-		System.out.println(ordreAffichage);
-		if (ordreAffichage == 1) {
-			centerContent.add(this.imageLabel1, BorderLayout.CENTER);
-			centerContent.add(this.imageLabel2, BorderLayout.CENTER);
-			centerContent.add(this.imageLabel3, BorderLayout.CENTER);
-		} else if (ordreAffichage == 2) {
-			centerContent.add(this.imageLabel2, BorderLayout.CENTER);
-			centerContent.add(this.imageLabel1, BorderLayout.CENTER);
-			centerContent.add(this.imageLabel3, BorderLayout.CENTER);
-		} else {
-			centerContent.add(this.imageLabel3, BorderLayout.CENTER);
-			centerContent.add(this.imageLabel2, BorderLayout.CENTER);
-			centerContent.add(this.imageLabel1, BorderLayout.CENTER);
-		}
-		centerContent.setBackground(Color.black);
+			rightContent.add(this.imageLabel1, BorderLayout.CENTER);
+			rightContent.add(this.imageLabel2, BorderLayout.CENTER);
+			rightContent.add(this.imageLabel3, BorderLayout.CENTER);
+			
+		rightContent.setBackground(Color.black);
 
-		leftContent.setPreferredSize(this.dimension);
-
-		Dimension dim = new Dimension(410, 200);
-		head.setPreferredSize(new Dimension(410, 100));
+		Dimension dim = new Dimension(400, 500);
+		leftContent.setPreferredSize(dim);
+		head.setPreferredSize(new Dimension(350, 100));
 
 		//this.nbArtistes.setText("Nombre d'artistes  trouvés : " + this.model.getPart().getNombreQuest()+ "");
 		this.nbArtistes.setText("Question n°1");
@@ -145,8 +134,10 @@ public class GamePanel extends SContainer implements Observer {
 		head.setBackground(Color.green);
 
 		JPanel body = new JPanel();
-		body.setPreferredSize(new Dimension(400, 90));
-		body.setBackground(Color.red);
+		body.setPreferredSize(new Dimension(400, 150));
+		body.setBackground(Color.white);
+		//JCheckBox casePasCochee = new JCheckBox("Une case `a cocher ");
+		afficheTitre = new JCheckBox("Afficher titre de la chanson", false);
 		/*
 		 * BoutonListener bl = new BoutonListener(); Dimension buttonDimension =
 		 * new Dimension(150,50); this.boutonStart = new JButton("Commencer");
@@ -156,17 +147,38 @@ public class GamePanel extends SContainer implements Observer {
 		this.labelTitreChanson = new JLabel("\nTitre de la chanson : ");
 		this.labelTitreChanson.setPreferredSize(new Dimension(400, 30)); //Largeur x Hauteur
 		this.labelTitreChanson.setHorizontalAlignment(JLabel.CENTER);
+		this.labelTitreChanson.setVisible(false);
 		this.titreChanson = new JLabel("Titre de la chanson : ");
 		this.titreChanson.setPreferredSize(new Dimension(400, 40));
 		this.titreChanson.setForeground(Color.blue);
 		this.titreChanson.setFont(comics30);
+		this.titreChanson.setVisible(false);
 		this.titreChanson.setHorizontalAlignment(JLabel.CENTER);
+		afficheTitre.setBackground(Color.white);
+		body.add(this.afficheTitre);
 		body.add(this.labelTitreChanson);
 		body.add(this.titreChanson);
+		
+		afficheTitre.addActionListener( new ActionListener() {
+		public void actionPerformed( ActionEvent e) {
+		
+		if ( afficheTitre. isSelected() == true){
+			// la case est cochée
+			labelTitreChanson.setVisible(true);
+			titreChanson.setVisible(true);
+		} else{
+			// la case n’est pas cochée
+			labelTitreChanson.setVisible(false);
+			titreChanson.setVisible(false);
+			}
+		}
+		});
 
+		
 		final JPanel foot = new JPanel(new BorderLayout());
-		foot.setPreferredSize(new Dimension(400, 120));
-		foot.setBackground(Color.orange);
+		foot.setPreferredSize(new Dimension(400, 100));
+//		foot.setBackground(Color.orange);
+		
 		//this.ap = new AudioPlayerGUI();
 		//this.ap.setPreferredSize(new Dimension(400, 100));
 		//foot.add(ap);
@@ -181,7 +193,6 @@ public class GamePanel extends SContainer implements Observer {
 						else
 							return false;
 					}
-		
 					@Override
 					public String getDescription() {
 						return null;
@@ -191,73 +202,64 @@ public class GamePanel extends SContainer implements Observer {
 				foot.setPreferredSize(new Dimension(200, 50));
 		
 				stop = new AbstractAction() {
-		
 					public void actionPerformed(ActionEvent arg0) {
 						//Thread.currentThread().interrupt();				
 						player.stop();				
 					}
 				};
-				stop.putValue(Action.SMALL_ICON, new ImageIcon("Images/stop.png"));		
+				stop.putValue(Action.SMALL_ICON, new ImageIcon("Images/Stop-Button.png"));		
 				
 				this.nomArtiste = "";
 				play= new AbstractAction() {
-		
 					public void actionPerformed(ActionEvent arg0) {
-						//
+						//Pour aller chercher automatiquement le son dans le dossier "Wave/"
 						chooser.setSelectedFile(new File("Wave/"+nomArtiste+".wav"));
 						audioFile=chooser.getSelectedFile();
 						player.setFile(audioFile);	
 						player.init();
 	                   //title.setText("Fichier en cours de lecture: "+ audioFile.getName());
 	                   foot.paintAll(foot.getGraphics());
-						
 						//	player.init();
 							audioPlayerThread = new Thread(player);
 							audioPlayerThread.start();
-		                  
+		                  /*
 							player.getLine().addLineListener(new LineListener(){
 		
 								public void update(LineEvent le) {
 									if(le.getType()==LineEvent.Type.STOP){					
 										play.setEnabled(true);
-										stop.setEnabled(false);	
-										
-										
+										stop.setEnabled(false);																					
 									}
 									if(le.getType()==LineEvent.Type.START){					
 										play.setEnabled(false);
-										stop.setEnabled(true);	
-										
+										stop.setEnabled(true);											
 									}	
 								}			
-							});
-						
+							});*/						
 					}
 				};
-
-				play.putValue(Action.SMALL_ICON, new ImageIcon("Images/play.png"));		
+				play.putValue(Action.SMALL_ICON, new ImageIcon("Images/Play-Button.png"));		
 		
 				load = new AbstractAction() {
 					public void actionPerformed(ActionEvent arg0) {
 						int returnVal = chooser.showOpenDialog(frame);
-						if (returnVal == JFileChooser.APPROVE_OPTION) {
-							
+						if (returnVal == JFileChooser.APPROVE_OPTION) {				
 							audioFile=chooser.getSelectedFile();
 							player.setFile(audioFile);	
 		                   player.init();
 		                   title.setText("Fichier en cours de lecture: "+ audioFile.getName());
-		                   foot.paintAll(foot.getGraphics());
-							
+		                   foot.paintAll(foot.getGraphics());							
 						}
 					}
 				};
-				load.putValue(Action.SMALL_ICON, new ImageIcon("Images/load.png"));
-				
+				load.putValue(Action.SMALL_ICON, new ImageIcon("Images/load.png"));				
 				
 				JToolBar toolbar = new JToolBar();
 				//toolbar.add(load);
 				toolbar.add(play);
 				toolbar.add(stop);
+				//toolbar.setBackground(Color.white);
+				toolbar.setFloatable(false);
 		
 				foot.add(toolbar, BorderLayout.NORTH);
 		       //title=new JLabel("Aucun titre en cours de lecture");
@@ -289,7 +291,7 @@ public class GamePanel extends SContainer implements Observer {
 
 		this.panel.add(leftContent);
 		//this.panel.add(rightContent);
-		this.panel.add(centerContent);
+		this.panel.add(rightContent);
 	}
 
 	public void start() {
