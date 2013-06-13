@@ -93,14 +93,14 @@ public class Model implements Observable {
 				this.part.setNombreQuest(this.part.getNombreQuest() + 1);
 				JOptionPane.showMessageDialog(
 						null,
-						"Vous avez trouvé en "
+						"Chanteur trouvé en "
 								+ this.quest.getNombreCoups()
 								+ " "
-								+ " coup"
+								+ "coup"
 								+ ((this.quest.getNombreCoups() > 1) ? "s"
-										: "\n")
-								+ "que l'artiste de la chanson était << "
-								+ this.quest.getArtistQuest()[0] + " >> "
+										: "")
+								+ " : "
+								+ this.quest.getArtistQuest()[0] + " "
 								+ ", avec " + this.quest.getNbErreurs()
 								+ " erreur"
 								+ ((this.quest.getNbErreurs() > 1) ? "s" : "")
@@ -119,9 +119,9 @@ public class Model implements Observable {
 				this.restartObserver();
 				this.nbQuestions++;
 			}
-
 			this.notifyObserver();
 		} else {
+			System.out.println(this.quest.getNbErreurs());
 			this.quest.setNbErreurs(this.quest.getNbErreurs() + 1);
 			this.notifyObserver();
 
@@ -129,8 +129,8 @@ public class Model implements Observable {
 
 				JOptionPane.showMessageDialog(
 						null,
-						"Le nom de l'artiste était :\n\t"
-								+ this.quest.getChanRep(), "Vous avez perdu",
+						"Le chanteur était "
+								+ this.quest.getArtistQuest()[0], "Vous avez perdu",
 						JOptionPane.NO_OPTION);
 				/*
 				 * if(this.scoreSerializer.isAccpeted(this.score)){ String nom =
@@ -147,6 +147,12 @@ public class Model implements Observable {
 				 * JOptionPane.NO_OPTION); this.accueilObserver(); }
 				 */
 			} else {
+				JOptionPane.showMessageDialog(
+						null,
+						"Ce n'est pas le bon chanteur !\n\n\tEssayez encore !\n"
+								//+ this.quest.getArtistQuest()[0]
+										, "Mauvaise réponse",
+						JOptionPane.NO_OPTION);
 				this.notifyObserver();
 			}
 		}

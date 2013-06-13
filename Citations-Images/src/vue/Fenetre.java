@@ -122,7 +122,7 @@ public class Fenetre extends JFrame implements Observer {
 	 */
 	public Fenetre() {
 		this.setTitle("Citations-Images");
-		this.setSize(1000, 600); // Taille(Largeur x Hauteur)
+		this.setSize(1000, 500); // Taille(Largeur x Hauteur)
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setResizable(true);

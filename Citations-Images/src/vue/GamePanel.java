@@ -87,33 +87,33 @@ public class GamePanel extends SContainer implements Observer {
 		JPanel head = new JPanel();
 		
 		this.imageLabel1 = new ImageLabel();
-		this.imageLabel1.setPreferredSize(new Dimension(150, 150));
+		this.imageLabel1.setPreferredSize(new Dimension(200, 200));
 		//this.imageLabel1.setHorizontalAlignment(JLabel.CENTER);
 		//this.imageLabel1.setVerticalAlignment(JLabel.CENTER);
 
 		this.imageLabel2 = new ImageLabel();
-		this.imageLabel2.setPreferredSize(new Dimension(150, 150));
+		this.imageLabel2.setPreferredSize(new Dimension(200, 200));
 		//this.imageLabel2.setHorizontalAlignment(JLabel.CENTER);
 		//this.imageLabel2.setVerticalAlignment(JLabel.CENTER);
 
 		this.imageLabel3 = new ImageLabel();
-		this.imageLabel3.setPreferredSize(new Dimension(150, 150));
+		this.imageLabel3.setPreferredSize(new Dimension(200, 200));
 		//this.imageLabel3.setHorizontalAlignment(JLabel.CENTER);
 		//this.imageLabel3.setVerticalAlignment(JLabel.CENTER);
 		
 		this.nbArtistes = new JLabel();
 		this.score = new JLabel();
 
-		this.dimension = new Dimension(500, 600);
+		this.dimension = new Dimension(650, 500);
 		rightContent.setPreferredSize(this.dimension);
 
 			rightContent.add(this.imageLabel1, BorderLayout.CENTER);
 			rightContent.add(this.imageLabel2, BorderLayout.CENTER);
 			rightContent.add(this.imageLabel3, BorderLayout.CENTER);
 			
-		rightContent.setBackground(Color.black);
+		rightContent.setBackground(Color.white);
 
-		Dimension dim = new Dimension(400, 500);
+		Dimension dim = new Dimension(300, 500);
 		leftContent.setPreferredSize(dim);
 		head.setPreferredSize(new Dimension(350, 100));
 
@@ -131,13 +131,13 @@ public class GamePanel extends SContainer implements Observer {
 		this.score.setHorizontalAlignment(JLabel.CENTER);
 		this.score.setFont(arial);
 		head.add(this.score, BorderLayout.SOUTH);
-		head.setBackground(Color.green);
+		head.setBackground(Color.white);
 
 		JPanel body = new JPanel();
 		body.setPreferredSize(new Dimension(400, 150));
 		body.setBackground(Color.white);
 		//JCheckBox casePasCochee = new JCheckBox("Une case `a cocher ");
-		afficheTitre = new JCheckBox("Afficher titre de la chanson", false);
+		afficheTitre = new JCheckBox("Afficher le titre de la chanson", false);
 		/*
 		 * BoutonListener bl = new BoutonListener(); Dimension buttonDimension =
 		 * new Dimension(150,50); this.boutonStart = new JButton("Commencer");
@@ -148,10 +148,10 @@ public class GamePanel extends SContainer implements Observer {
 		this.labelTitreChanson.setPreferredSize(new Dimension(400, 30)); //Largeur x Hauteur
 		this.labelTitreChanson.setHorizontalAlignment(JLabel.CENTER);
 		this.labelTitreChanson.setVisible(false);
-		this.titreChanson = new JLabel("Titre de la chanson : ");
+		this.titreChanson = new JLabel("Titre de la chanson");
 		this.titreChanson.setPreferredSize(new Dimension(400, 40));
 		this.titreChanson.setForeground(Color.blue);
-		this.titreChanson.setFont(comics30);
+		this.titreChanson.setFont(comics20);
 		this.titreChanson.setVisible(false);
 		this.titreChanson.setHorizontalAlignment(JLabel.CENTER);
 		afficheTitre.setBackground(Color.white);
@@ -268,9 +268,6 @@ public class GamePanel extends SContainer implements Observer {
 				//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				//frame.pack();
 
-
-
-		
 		ImageListener il = new ImageListener(this, this.model);
 		imageLabel1.addMouseListener(il);
 		imageLabel2.addMouseListener(il);
@@ -287,7 +284,7 @@ public class GamePanel extends SContainer implements Observer {
 		leftContent.add(head, BorderLayout.NORTH);
 		leftContent.add(body, BorderLayout.WEST);
 		leftContent.add(foot,BorderLayout.SOUTH);
-		leftContent.setBackground(Color.blue);
+		leftContent.setBackground(Color.white);
 
 		this.panel.add(leftContent);
 		//this.panel.add(rightContent);
@@ -373,6 +370,7 @@ public class GamePanel extends SContainer implements Observer {
 		this.imageLabel3.setImagePath(img3Path);
 		this.score.setText("Votre score actuel est de " +pts+" point"+((pts > 1) ? "s" : "")+".");
 		this.nbArtistes.setText("Question n°" +nbArtist);
+		this.player.stop();
 	}
 }
 
