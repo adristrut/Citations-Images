@@ -1,10 +1,15 @@
 package vue;
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.File;
 
 import javax.sound.sampled.LineEvent;
@@ -13,11 +18,20 @@ import javax.swing.AbstractAction;
 import javax.swing.AbstractButton;
 import javax.swing.Action;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.filechooser.FileFilter;
+
+import vue.JPanelChamp;
 
 import observer.Observer;
 
@@ -26,18 +40,39 @@ public class AjoutArtistTitlePanel extends SContainer implements Observer {
 	private AudioPlayer player;
 	private JFileChooser chooser;
 	private AbstractAction stop;
-	private String nomArtiste;
+
 	private AbstractAction play;
 	private AbstractAction load;
 	private JPanel centerContent;
 	private JLabel title;
+	private JLabel formTitle;
+	
+	private JLabel labelThematique;
+	private JComboBox chxThematique;
+	
+	private JLabel labelNomEntite;
+	private JTextField textNomEntite;
+	private String nomEntite;
+	
+	private JLabel labelTxtAssocie;
+	private JTextField txtFieldTextAssocie;
+	private String txtAssocie;
+	
+	private JLabel labelPathAudio;
+	private JTextField txtPathAudio;
+	private String pathAudio;
+	
+	private JLabel labelPathImage;
+	private JTextField txtPathImage;
+	private String pathImage;
 
+	
 	public AjoutArtistTitlePanel(Dimension dim) {
 		super(dim);
 		// TODO Auto-generated constructor stub
 		initPanel();
-
 	}
+	
 
 	@Override
 	public void update(String nomChanson, String img1Path, String img2Path,
@@ -81,8 +116,71 @@ public class AjoutArtistTitlePanel extends SContainer implements Observer {
 
 	@Override
 	protected void initPanel() {
-		centerContent = new JPanel(); 
-		// TODO Auto-generated method stub
+		centerContent = new JPanel();
+		centerContent.setPreferredSize(new Dimension(600, 500));
+		
+		JPanel head = new JPanel(); 
+		head.setPreferredSize(new Dimension(350, 50)); //largeur x hauteur
+
+		//this.nbArtistes.setText("Nombre d'artistes  trouvés : " + this.model.getPart().getNombreQuest()+ "");
+		this.formTitle = new JLabel("Ajouter une entrée");
+		//this.formTitle.setText("Ajouter une entrée");
+		this.formTitle.setPreferredSize(new Dimension(300, 20));
+		this.formTitle.setHorizontalAlignment(JLabel.CENTER);
+		this.formTitle.setFont(comics20);
+
+		head.add(this.formTitle, BorderLayout.NORTH);
+		head.setBackground(Color.white);
+
+		JPanel body = new JPanel();
+		body.setPreferredSize(new Dimension(500, 400));
+		body.setBackground(Color.white);
+		GridLayout gridFormulaire = new GridLayout(3,2,5,5);
+		body.setLayout(gridFormulaire);
+
+		/*
+		 * BoutonListener bl = new BoutonListener(); Dimension buttonDimension =
+		 * new Dimension(150,50); this.boutonStart = new JButton("Commencer");
+		 * this.boutonStart.addActionListener(bl);
+		 * boutonStart.setPreferredSize(buttonDimension); body.add(boutonStart);
+		 */
+		this.labelThematique = new JLabel("\nChoix de la thématique : ");;
+		String[] tab = {"Musique", "Génériques TV", "Discours", "Publicité"};
+		this.chxThematique = new JComboBox(tab);
+	    //Ajout du listener
+		this.chxThematique.addItemListener(new ItemState());
+		this.chxThematique.addActionListener(new ItemAction());
+		this.chxThematique.setPreferredSize(new Dimension(100, 20));
+		this.chxThematique.setFont(arial);
+		this.chxThematique.setForeground(Color.blue);
+		
+		this.labelNomEntite = new JLabel("\nTitre de la chanson : ");
+		this.labelNomEntite.setPreferredSize(new Dimension(200, 40)); //Largeur x Hauteur
+		this.labelNomEntite.setFont(arial);
+		this.labelNomEntite.setVerticalAlignment(JLabel.CENTER);
+		
+		this.textNomEntite = new JTextField("Titre de la chanson");
+		this.textNomEntite.setPreferredSize(new Dimension(200, 40));
+		this.textNomEntite.setFont(arial);
+		this.labelNomEntite.setVerticalAlignment(JLabel.CENTER);
+		
+		this.labelTxtAssocie = new JLabel("\nTitre de la chanson : ");
+		this.labelTxtAssocie.setPreferredSize(new Dimension(200, 40)); //Largeur x Hauteur
+		this.labelTxtAssocie.setFont(arial);
+		this.labelTxtAssocie.setVerticalAlignment(JLabel.CENTER);
+		
+		this.txtFieldTextAssocie = new JTextField("Titre de la chanson");
+		this.txtFieldTextAssocie.setPreferredSize(new Dimension(200, 40));
+		this.txtFieldTextAssocie.setFont(arial);
+		this.txtFieldTextAssocie.setHorizontalAlignment(JLabel.CENTER);
+
+		body.add(this.labelThematique);
+		body.add(this.chxThematique);
+		body.add(this.labelNomEntite);
+		body.add(this.textNomEntite);
+		body.add(this.labelTxtAssocie);
+		body.add(this.txtFieldTextAssocie);
+		
 		final JPanel foot = new JPanel(new BorderLayout());
 		foot.setPreferredSize(new Dimension(400, 100));
 //		foot.setBackground(Color.orange);
@@ -117,7 +215,7 @@ public class AjoutArtistTitlePanel extends SContainer implements Observer {
 				};
 				stop.putValue(Action.SMALL_ICON, new ImageIcon("Images/Stop-Button.png"));		
 				
-				this.nomArtiste = "";
+				this.nomEntite = "";
 				play= new AbstractAction() {
 					private File audioFile;
 					private Thread audioPlayerThread;
@@ -184,11 +282,31 @@ public class AjoutArtistTitlePanel extends SContainer implements Observer {
 				toolbar.setFloatable(false);
 		
 				foot.add(toolbar, BorderLayout.NORTH);
-		        
-				centerContent.add(foot,BorderLayout.SOUTH);
+				
 				centerContent.setBackground(Color.white);
-
+				
+				GridLayout formePanPrincipal = new GridLayout(3,1,5,5);
+				centerContent.setLayout(formePanPrincipal);
+				
+				centerContent.add(head);
+				centerContent.add(body);
+				centerContent.add(foot);
+				centerContent.setBackground(Color.white);
+				;
 				this.panel.add(centerContent);
+				
 	}
+	
+	  class ItemAction implements ActionListener{
+		    public void actionPerformed(ActionEvent e) {
+		      System.out.println("ActionListener : action sur " + chxThematique.getSelectedItem());
+		    }              
+		  }
 
+	  //Classe interne implémentant l'interface ItemListener
+	  class ItemState implements ItemListener{
+	    public void itemStateChanged(ItemEvent e) {
+	      System.out.println("événement déclenché sur : " + e.getItem());
+	    }              
+	  }	  	
 }

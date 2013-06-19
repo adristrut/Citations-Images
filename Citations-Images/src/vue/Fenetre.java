@@ -141,6 +141,7 @@ public class Fenetre extends JFrame implements Observer {
 		// this.model1.addObserver(this); A supprimer si on ne fait pas la ligne
 		// au dessus (Null pointer Exception)
 		this.size = new Dimension(this.getWidth(), this.getHeight());
+		System.out.println(this.getWidth()+" "+this.getHeight());
 
 		menu = new JMenuBar();
 
@@ -221,6 +222,7 @@ public class Fenetre extends JFrame implements Observer {
 								"Créateur : Adrien\nLicence : Freeware\nCopyright : Sophie LEBFEVRE Orthophoniste",
 								"Informations", JOptionPane.NO_OPTION);
 				conteneur.removeAll();
+				System.out.println(size);
 				conteneur.add(new AccueilPanel(size).getPanel());
 				conteneur.revalidate();
 				// model.reset(); modif
