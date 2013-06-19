@@ -153,6 +153,7 @@ public class Fenetre extends JFrame implements Observer {
 				InputEvent.CTRL_MASK));
 		nouveau.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+			 
 				conteneur.removeAll();
 				// Pour relancer une nouvelle partie avec un nouveau model
 				initModel();
@@ -239,10 +240,19 @@ public class Fenetre extends JFrame implements Observer {
 		ajouterEntree.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				conteneur.removeAll();
-				conteneur.add(new AjoutArtistTitlePanel(size).getPanel(),
-						BorderLayout.CENTER);
+				// Pour relancer une nouvelle partie avec un nouveau model
+				//initModel();
+				//GamePanel gp = new GamePanel(size, model1);
+				AjoutArtistTitlePanel atp = new AjoutArtistTitlePanel(size);
+
+				// "Suppression du passage en paramètre d'un objet du type Observable"
+				//model1.addObserver(gp);
+				//conteneur.add(gp.getPanel(), BorderLayout.CENTER);
+				//conteneur.revalidate();
+				conteneur.removeAll();
+				conteneur.add(atp.getPanel(), BorderLayout.CENTER);
 				conteneur.revalidate();
-				model1.reset();
+				//model1.reset();
 			}
 		});
 

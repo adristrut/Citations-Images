@@ -1,8 +1,12 @@
 package vue;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.image.ImageProducer;
+import java.awt.image.MemoryImageSource;
 import java.io.File;
 import java.io.IOException;
 
@@ -15,14 +19,26 @@ public class ImageLabel extends JLabel{
 	public ImageLabel(){}
 	public ImageLabel(String path){
 		this.imagePath = path;
+		
+		/*
+		int width=200, height= 200;
+		int[] pixels= new int[width * height] ;
+		Toolkit tk = Toolkit.getDefaultToolkit(); 
+		Image img = tk.createImage((ImageProducer) new MemoryImageSource(width,height,pixels,0,width));
+		img = tk.getImage("Images/visage-inconnu.jpg");
+		*/
+		
 	}
 	
 	public void paint(Graphics g){
-			g.setColor(Color.black);
+			//g.setColor(Color.black);
 			//g.drawRect(0, 0, this.getWidth(), this.getHeight());
 			g.drawRect(this.CENTER, this.CENTER, 200, 200);
+						
 			try {
+ 
 				Image img = ImageIO.read(new File(this.imagePath));
+				
 				g.drawImage(img, 0, 0, this);
 				this.setText(this.imagePath);
 			} catch (IOException e) {

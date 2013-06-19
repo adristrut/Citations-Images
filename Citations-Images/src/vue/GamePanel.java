@@ -74,6 +74,7 @@ public class GamePanel extends SContainer implements Observer {
 	}
 
 	protected void initPanel(Model mod) {
+		
 		this.model = mod;
 		System.out
 				.println("Je suis dans le GamePanel et la rep à la question est : "
