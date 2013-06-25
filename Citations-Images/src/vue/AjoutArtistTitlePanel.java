@@ -30,6 +30,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import vue.JPanelChamp;
 
@@ -120,21 +121,25 @@ public class AjoutArtistTitlePanel extends SContainer implements Observer {
 		centerContent.setPreferredSize(new Dimension(600, 500));
 		
 		JPanel head = new JPanel(); 
-		head.setPreferredSize(new Dimension(350, 50)); //largeur x hauteur
+		head.setPreferredSize(new Dimension(250, 10)); //largeur x hauteur
+		head.setBackground(Color.blue);
 
 		//this.nbArtistes.setText("Nombre d'artistes  trouvés : " + this.model.getPart().getNombreQuest()+ "");
 		this.formTitle = new JLabel("Ajouter une entrée");
-		//this.formTitle.setText("Ajouter une entrée");
-		this.formTitle.setPreferredSize(new Dimension(300, 20));
-		this.formTitle.setHorizontalAlignment(JLabel.CENTER);
 		this.formTitle.setFont(comics20);
+		//this.formTitle.setText("Ajouter une entrée");
+		//this.formTitle.setPreferredSize(new Dimension(300, 10));
+		//this.formTitle.setHorizontalAlignment(JLabel.CENTER);
 
-		head.add(this.formTitle, BorderLayout.NORTH);
-		head.setBackground(Color.white);
+
+		head.add(this.formTitle);
+		//head.add(this.formTitle, BorderLayout.NORTH);
+		//head.setBackground(Color.white);
 
 		JPanel body = new JPanel();
 		body.setPreferredSize(new Dimension(500, 400));
-		body.setBackground(Color.white);
+		body.setBackground(Color.green);
+		//body.setBackground(Color.white);
 		GridLayout gridFormulaire = new GridLayout(3,2,5,5);
 		body.setLayout(gridFormulaire);
 
@@ -144,7 +149,8 @@ public class AjoutArtistTitlePanel extends SContainer implements Observer {
 		 * this.boutonStart.addActionListener(bl);
 		 * boutonStart.setPreferredSize(buttonDimension); body.add(boutonStart);
 		 */
-		this.labelThematique = new JLabel("\nChoix de la thématique : ");;
+		this.labelThematique = new JLabel("\nChoix de la thématique : ");
+		this.labelThematique.setFont(arial);
 		String[] tab = {"Musique", "Génériques TV", "Discours", "Publicité"};
 		this.chxThematique = new JComboBox(tab);
 	    //Ajout du listener
@@ -154,25 +160,25 @@ public class AjoutArtistTitlePanel extends SContainer implements Observer {
 		this.chxThematique.setFont(arial);
 		this.chxThematique.setForeground(Color.blue);
 		
-		this.labelNomEntite = new JLabel("\nTitre de la chanson : ");
+		this.labelNomEntite = new JLabel("\nNom du chanteur : ");
 		this.labelNomEntite.setPreferredSize(new Dimension(200, 40)); //Largeur x Hauteur
 		this.labelNomEntite.setFont(arial);
 		this.labelNomEntite.setVerticalAlignment(JLabel.CENTER);
 		
-		this.textNomEntite = new JTextField("Titre de la chanson");
+		this.textNomEntite = new JTextField("Nom du chanteur à ajouter");
 		this.textNomEntite.setPreferredSize(new Dimension(200, 40));
 		this.textNomEntite.setFont(arial);
-		this.labelNomEntite.setVerticalAlignment(JLabel.CENTER);
+
 		
 		this.labelTxtAssocie = new JLabel("\nTitre de la chanson : ");
 		this.labelTxtAssocie.setPreferredSize(new Dimension(200, 40)); //Largeur x Hauteur
 		this.labelTxtAssocie.setFont(arial);
 		this.labelTxtAssocie.setVerticalAlignment(JLabel.CENTER);
 		
-		this.txtFieldTextAssocie = new JTextField("Titre de la chanson");
+		this.txtFieldTextAssocie = new JTextField("Titre de la chanson à ajouter");
 		this.txtFieldTextAssocie.setPreferredSize(new Dimension(200, 40));
 		this.txtFieldTextAssocie.setFont(arial);
-		this.txtFieldTextAssocie.setHorizontalAlignment(JLabel.CENTER);
+
 
 		body.add(this.labelThematique);
 		body.add(this.chxThematique);
@@ -183,7 +189,7 @@ public class AjoutArtistTitlePanel extends SContainer implements Observer {
 		
 		final JPanel foot = new JPanel(new BorderLayout());
 		foot.setPreferredSize(new Dimension(400, 100));
-//		foot.setBackground(Color.orange);
+		foot.setBackground(Color.orange);
 		
 		//this.ap = new AudioPlayerGUI();
 		//this.ap.setPreferredSize(new Dimension(400, 100));
@@ -191,6 +197,8 @@ public class AjoutArtistTitlePanel extends SContainer implements Observer {
 		 player = new AudioPlayer();
 		 //contentPane = new JPanel(new BorderLayout());
 				chooser = new JFileChooser();
+				chooser.setFileFilter(new FileNameExtensionFilter("Son", "wav", "mp3"));
+				/*
 				chooser.setFileFilter(new FileFilter() {
 					@Override
 					public boolean accept(File f) {
@@ -203,7 +211,7 @@ public class AjoutArtistTitlePanel extends SContainer implements Observer {
 					public String getDescription() {
 						return null;
 					}
-				});
+				});*/
 		
 				foot.setPreferredSize(new Dimension(200, 50));
 		
@@ -226,9 +234,9 @@ public class AjoutArtistTitlePanel extends SContainer implements Observer {
 						//audioFile=chooser.getSelectedFile();
 						//player.setFile(audioFile);	
 						//player.init();
-	                   title.setText("Fichier en cours de lecture: "+ audioFile.getName());
-	                   foot.paintAll(foot.getGraphics());
-						//	player.init();
+	                   //title.setText("Fichier en cours de lecture: "+ audioFile.getName());
+	                  // foot.paintAll(foot.getGraphics());
+							player.init();
 							audioPlayerThread = new Thread(player);
 							audioPlayerThread.start();
 		                  
@@ -259,7 +267,7 @@ public class AjoutArtistTitlePanel extends SContainer implements Observer {
 							audioFile=chooser.getSelectedFile();
 							player.setFile(audioFile);	
 		                   player.init();
-		                   //title.setText("Fichier en cours de lecture: "+ audioFile.getName());
+		                   title.setText("Fichier en cours de lecture: "+ audioFile.getName());
 		                   foot.paintAll(foot.getGraphics());							
 						}
 					}
@@ -267,7 +275,7 @@ public class AjoutArtistTitlePanel extends SContainer implements Observer {
 				load.putValue(Action.SMALL_ICON, new ImageIcon("Images/Load-Button.jpg"));
 				//load.putValue(Action.SMALL_ICON, new ImageIcon("Images/load.png"));	
 				
-				JToolBar toolbar = new JToolBar();
+				JToolBar toolbar = new JToolBar(null, JToolBar.VERTICAL);
 				title=new JLabel("Aucun titre en cours de lecture");
 				
 				toolbar.setSize(200, 50);
@@ -275,8 +283,8 @@ public class AjoutArtistTitlePanel extends SContainer implements Observer {
 				toolbar.add(play);
 				toolbar.add(stop);
 				
-				title.setText("Fichier en cours de lecture");
-				toolbar.add(title);
+				//title.setText("Fichier en cours de lecture");
+				//toolbar.add(title);
 				
 				toolbar.setBackground(Color.white);
 				toolbar.setFloatable(false);
@@ -288,7 +296,7 @@ public class AjoutArtistTitlePanel extends SContainer implements Observer {
 				GridLayout formePanPrincipal = new GridLayout(3,1,5,5);
 				centerContent.setLayout(formePanPrincipal);
 				
-				centerContent.add(head);
+				//centerContent.add(head);
 				centerContent.add(body);
 				centerContent.add(foot);
 				centerContent.setBackground(Color.white);

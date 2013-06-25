@@ -22,8 +22,9 @@ public class AccueilPanel extends SContainer{
 	public void initPanel(){
 		JLabel titre = new JLabel("Bienvenue dans le jeu Citations-Images\n");
 		titre.setHorizontalAlignment(JLabel.CENTER);
-		titre.setFont(comics30);
-		this.panel.add(titre, BorderLayout.NORTH);
+		titre.setVerticalTextPosition(JLabel.CENTER);
+		titre.setFont(comics40);
+		this.panel.add(titre, BorderLayout.CENTER);
 		
 		this.panel.add(new JLabel(new ImageIcon("Images/visage-inconnu.jpg")), BorderLayout.CENTER);
 		
@@ -32,7 +33,10 @@ public class AccueilPanel extends SContainer{
 		texte.setEditable(false);
 		texte.setBackground(Color.white);
 		
+		
 		this.panel.add(texte, BorderLayout.SOUTH);
+		this.panel.setBackground(Color.red);
 	}
 	
 }
+
