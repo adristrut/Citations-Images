@@ -88,33 +88,33 @@ public class GamePanel extends SContainer implements Observer {
 		JPanel head = new JPanel();
 		
 		this.imageLabel1 = new ImageLabel();
-		this.imageLabel1.setPreferredSize(new Dimension(200, 200));
+		this.imageLabel1.setPreferredSize(new Dimension(350, 350));
 		//this.imageLabel1.setHorizontalAlignment(JLabel.CENTER);
 		//this.imageLabel1.setVerticalAlignment(JLabel.CENTER);
 
 		this.imageLabel2 = new ImageLabel();
-		this.imageLabel2.setPreferredSize(new Dimension(200, 200));
+		this.imageLabel2.setPreferredSize(new Dimension(350, 350));
 		//this.imageLabel2.setHorizontalAlignment(JLabel.CENTER);
 		//this.imageLabel2.setVerticalAlignment(JLabel.CENTER);
 
 		this.imageLabel3 = new ImageLabel();
-		this.imageLabel3.setPreferredSize(new Dimension(200, 200));
+		this.imageLabel3.setPreferredSize(new Dimension(350, 350));
 		//this.imageLabel3.setHorizontalAlignment(JLabel.CENTER);
 		//this.imageLabel3.setVerticalAlignment(JLabel.CENTER);
 		
 		this.nbArtistes = new JLabel();
 		this.score = new JLabel();
 
-		this.dimension = new Dimension(650, 400);
+		this.dimension = new Dimension(1100, 400);
 		rightContent.setPreferredSize(this.dimension);
 
 			rightContent.add(this.imageLabel1, BorderLayout.CENTER);
 			rightContent.add(this.imageLabel2, BorderLayout.CENTER);
 			rightContent.add(this.imageLabel3, BorderLayout.CENTER);
 			
-		rightContent.setBackground(Color.white);
+		rightContent.setBackground(Color.blue);
 
-		Dimension dim = new Dimension(300, 400);
+		Dimension dim = new Dimension(200, 400);
 		leftContent.setPreferredSize(dim);
 		head.setPreferredSize(new Dimension(350, 50));
 

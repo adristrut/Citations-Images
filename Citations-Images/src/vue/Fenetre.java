@@ -3,13 +3,17 @@ package vue;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -41,20 +45,37 @@ public class Fenetre extends JFrame implements Observer {
 	private JMenuItem ajouterEntree = null;
 	private JMenuItem ajouterChanteurChanson = null;
 
-	private JPanel conteneur = new JPanel();
+	//private JPanel conteneur = new JPanel();
+	private CustomComponents conteneur = new CustomComponents();
 	private Dimension size;
 	// private Observable model;
 	private Model model1;
 
 	public Fenetre() {
+		Box box = new Box(BoxLayout.Y_AXIS);
+        box.setAlignmentX(JComponent.CENTER_ALIGNMENT);
+        box.add(Box.createVerticalGlue());
+        box.add(conteneur);
+        box.add(Box.createVerticalGlue());
+        add(box);
+        pack();
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setMaximumSize(getMinimumSize());
+        setMinimumSize(getMinimumSize());
+        setPreferredSize(getPreferredSize());
+        setLocation(150, 150);
+        //setVisible(true);
+		
 		this.setTitle("Citations-Images");
-		this.setSize(1000, 400); // Taille(Largeur x Hauteur)
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//this.setSize(1000, 400); // Taille(Largeur x Hauteur)
+		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setResizable(true);
 		this.setIconImage(new ImageIcon("Images/logo.png").getImage());
 		//this.setDefaultLookAndFeelDecorated(false);    
 		this.setExtendedState(this.MAXIMIZED_BOTH);
+		
+		
 		/*
 		 * this.model = obs; modif
 		 * "Suppression du passage en paramètre d'un objet du type Observable"
@@ -214,15 +235,10 @@ public class Fenetre extends JFrame implements Observer {
 
 		this.conteneur.setPreferredSize(this.size);
 		this.conteneur.setBackground(Color.blue);
-		this.conteneur.add(new AccueilPanel(this.size).getPanel(), BorderLayout.CENTER);
-		this.conteneur.setAlignmentY(3);
-		JPanel test = new JPanel();
-		test.setPreferredSize(this.size);
-		test.setBackground(Color.pink);
-		this.add(test);
-		this.add(this.conteneur, BorderLayout.CENTER);
+		this.conteneur.add(new AccueilPanel(this.size).getPanel());
+				
+		//this.add(this.conteneur, BorderLayout.CENTER);
 		//this.setContentPane(this.conteneur);
-
 		this.setJMenuBar(menu);
 
 		try {

@@ -33,7 +33,7 @@ public class ImageLabel extends JLabel{
 	public void paint(Graphics g){
 			//g.setColor(Color.black);
 			//g.drawRect(0, 0, this.getWidth(), this.getHeight());
-			g.drawRect(this.CENTER, this.CENTER, 200, 200);
+			g.drawRect(this.CENTER, this.CENTER, 350, 350);
 						
 			try {
  

@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 
 public abstract class SContainer{
 	protected JPanel panel;
+	//protected CustomComponents panel;
 	
 	protected Font comics30 = new Font("Comics Sans MS", Font.BOLD, 30);
 	protected Font comics40 = new Font("Comics Sans MS", Font.BOLD, 40);
@@ -16,6 +17,7 @@ public abstract class SContainer{
 	protected Font dialog = new Font("Dialog", Font.BOLD + Font.ITALIC, 15);
 	
 	public SContainer(Dimension dim){
+		//this.panel = new CustomComponents();
 		this.panel = new JPanel();
 		this.panel.setPreferredSize(dim);
 		this.panel.setBackground(Color.white);
