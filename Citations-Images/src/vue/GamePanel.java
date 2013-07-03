@@ -105,14 +105,14 @@ public class GamePanel extends SContainer implements Observer {
 		this.nbArtistes = new JLabel();
 		this.score = new JLabel();
 
-		this.dimension = new Dimension(1100, 400);
+		this.dimension = new Dimension(1080, 400);
 		rightContent.setPreferredSize(this.dimension);
 
 			rightContent.add(this.imageLabel1, BorderLayout.CENTER);
 			rightContent.add(this.imageLabel2, BorderLayout.CENTER);
 			rightContent.add(this.imageLabel3, BorderLayout.CENTER);
 			
-		rightContent.setBackground(Color.blue);
+		//rightContent.setBackground(Color.GRAY);
 
 		Dimension dim = new Dimension(200, 400);
 		leftContent.setPreferredSize(dim);
@@ -127,16 +127,16 @@ public class GamePanel extends SContainer implements Observer {
 		head.add(this.nbArtistes, BorderLayout.NORTH);
 
 		//this.score.setText("Votre score actuel est de "+ this.model.getPart().getPoint() + " point"+ ((this.model.getPart().getPoint()) > 1 ? "s" : "") + ".");
-		this.score.setText("Votre score actuel est de 0 point.");
+		this.score.setText("Score : 0 point");
 		this.score.setPreferredSize(new Dimension(300, 20));
 		this.score.setHorizontalAlignment(JLabel.CENTER);
 		this.score.setFont(arial);
 		head.add(this.score, BorderLayout.SOUTH);
-		head.setBackground(Color.white);
+		//head.setBackground(Color.white);
 
 		JPanel body = new JPanel();
 		body.setPreferredSize(new Dimension(400, 100));
-		body.setBackground(Color.white);
+		//body.setBackground(Color.white);
 		//JCheckBox casePasCochee = new JCheckBox("Une case `a cocher ");
 		afficheTitre = new JCheckBox("Afficher le titre de la chanson", false);
 		/*
@@ -155,7 +155,7 @@ public class GamePanel extends SContainer implements Observer {
 		this.titreChanson.setFont(comics20);
 		this.titreChanson.setVisible(false);
 		this.titreChanson.setHorizontalAlignment(JLabel.CENTER);
-		afficheTitre.setBackground(Color.white);
+		//afficheTitre.setBackground(Color.white);
 		body.add(this.afficheTitre);
 		body.add(this.labelTitreChanson);
 		body.add(this.titreChanson);
@@ -287,7 +287,7 @@ public class GamePanel extends SContainer implements Observer {
 		leftContent.add(head, BorderLayout.NORTH);
 		leftContent.add(body, BorderLayout.WEST);
 		leftContent.add(foot,BorderLayout.SOUTH);
-		leftContent.setBackground(Color.white);
+		//leftContent.setBackground(Color.white);
 
 		this.panel.add(leftContent);
 		//this.panel.add(rightContent);
@@ -323,7 +323,7 @@ public class GamePanel extends SContainer implements Observer {
 		this.imageLabel1.setImagePath(img1Path);
 		this.imageLabel2.setImagePath(img2Path);
 		this.imageLabel3.setImagePath(img3Path);
-		this.score.setText("Votre score actuel est de " +pts+" point"+((pts > 1) ? "s" : "")+".");
+		this.score.setText("Score : " +pts+" point"+((pts > 1) ? "s" : "")+"");
 		this.nbArtistes.setText("Question n°" +nbArtist);
 	}
 
@@ -371,7 +371,7 @@ public class GamePanel extends SContainer implements Observer {
 		this.imageLabel1.setImagePath(img1Path);
 		this.imageLabel2.setImagePath(img2Path);
 		this.imageLabel3.setImagePath(img3Path);
-		this.score.setText("Votre score actuel est de " +pts+" point"+((pts > 1) ? "s" : "")+".");
+		this.score.setText("Score : " +pts+" point"+((pts > 1) ? "s" : "")+"");
 		this.nbArtistes.setText("Question n°" +nbArtist);
 		this.player.stop();
 	}

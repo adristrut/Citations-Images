@@ -234,7 +234,7 @@ public class Fenetre extends JFrame implements Observer {
 		menu.add(apropos);
 
 		this.conteneur.setPreferredSize(this.size);
-		this.conteneur.setBackground(Color.blue);
+		//this.conteneur.setBackground(Color.blue);
 		this.conteneur.add(new AccueilPanel(this.size).getPanel());
 				
 		//this.add(this.conteneur, BorderLayout.CENTER);

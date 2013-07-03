@@ -20,7 +20,7 @@ public abstract class SContainer{
 		//this.panel = new CustomComponents();
 		this.panel = new JPanel();
 		this.panel.setPreferredSize(dim);
-		this.panel.setBackground(Color.white);
+		//this.panel.setBackground(Color.white);
 		
 	}
 	

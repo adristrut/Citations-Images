@@ -30,7 +30,7 @@ class CustomComponents extends JPanel {
         int margin = 50;
         Dimension dim = getSize();
         super.paintComponent(g);
-        g.setColor(Color.yellow);
+        //g.setColor(Color.yellow);
         g.fillRect(margin, margin, dim.width - margin * 2, dim.height - margin * 2);
     }
 }
