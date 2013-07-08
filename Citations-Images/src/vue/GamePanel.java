@@ -106,17 +106,17 @@ public class GamePanel extends SContainer implements Observer {
 		this.score = new JLabel();
 
 		this.dimension = new Dimension(1080, 400);
-		rightContent.setPreferredSize(this.dimension);
+		//rightContent.setPreferredSize(this.dimension);
 
-			rightContent.add(this.imageLabel1, BorderLayout.CENTER);
-			rightContent.add(this.imageLabel2, BorderLayout.CENTER);
-			rightContent.add(this.imageLabel3, BorderLayout.CENTER);
+		//rightContent.add(this.imageLabel1, BorderLayout.CENTER);
+		//rightContent.add(this.imageLabel2, BorderLayout.CENTER);
+		//rightContent.add(this.imageLabel3, BorderLayout.CENTER);
 			
-		//rightContent.setBackground(Color.GRAY);
+		rightContent.setBackground(Color.GRAY);
 
-		Dimension dim = new Dimension(200, 400);
+		Dimension dim = new Dimension(1080,650);//(300, 400);
 		leftContent.setPreferredSize(dim);
-		head.setPreferredSize(new Dimension(350, 50));
+		head.setPreferredSize(new Dimension(300, 150));
 
 		//this.nbArtistes.setText("Nombre d'artistes  trouvés : " + this.model.getPart().getNombreQuest()+ "");
 		this.nbArtistes.setText("Question n°1");
@@ -135,7 +135,7 @@ public class GamePanel extends SContainer implements Observer {
 		//head.setBackground(Color.white);
 
 		JPanel body = new JPanel();
-		body.setPreferredSize(new Dimension(400, 100));
+		body.setPreferredSize(new Dimension(1080, 360));
 		//body.setBackground(Color.white);
 		//JCheckBox casePasCochee = new JCheckBox("Une case `a cocher ");
 		afficheTitre = new JCheckBox("Afficher le titre de la chanson", false);
@@ -146,19 +146,20 @@ public class GamePanel extends SContainer implements Observer {
 		 * boutonStart.setPreferredSize(buttonDimension); body.add(boutonStart);
 		 */
 		this.labelTitreChanson = new JLabel("\nTitre de la chanson : ");
-		this.labelTitreChanson.setPreferredSize(new Dimension(400, 30)); //Largeur x Hauteur
+		this.labelTitreChanson.setPreferredSize(new Dimension(300, 30)); //Largeur x Hauteur
 		this.labelTitreChanson.setHorizontalAlignment(JLabel.CENTER);
 		this.labelTitreChanson.setVisible(false);
 		this.titreChanson = new JLabel("Titre de la chanson");
-		this.titreChanson.setPreferredSize(new Dimension(400, 40));
+		this.titreChanson.setPreferredSize(new Dimension(300, 40));
 		this.titreChanson.setForeground(Color.blue);
 		this.titreChanson.setFont(comics20);
 		this.titreChanson.setVisible(false);
 		this.titreChanson.setHorizontalAlignment(JLabel.CENTER);
 		//afficheTitre.setBackground(Color.white);
-		body.add(this.afficheTitre);
-		body.add(this.labelTitreChanson);
-		body.add(this.titreChanson);
+		//Modification des 3 labels de body en head
+		head.add(this.afficheTitre);
+		head.add(this.labelTitreChanson);
+		head.add(this.titreChanson);
 		
 		afficheTitre.addActionListener( new ActionListener() {
 		public void actionPerformed( ActionEvent e) {
@@ -174,6 +175,10 @@ public class GamePanel extends SContainer implements Observer {
 			}
 		}
 		});
+		
+		body.add(this.imageLabel1, BorderLayout.CENTER);
+		body.add(this.imageLabel2, BorderLayout.CENTER);
+		body.add(this.imageLabel3, BorderLayout.CENTER);
 
 		
 		final JPanel foot = new JPanel(new BorderLayout());
@@ -285,13 +290,13 @@ public class GamePanel extends SContainer implements Observer {
 		 */
 
 		leftContent.add(head, BorderLayout.NORTH);
-		leftContent.add(body, BorderLayout.WEST);
+		leftContent.add(body, BorderLayout.CENTER);
 		leftContent.add(foot,BorderLayout.SOUTH);
-		//leftContent.setBackground(Color.white);
-
+		leftContent.setBackground(Color.RED);
+		
 		this.panel.add(leftContent);
 		//this.panel.add(rightContent);
-		this.panel.add(rightContent);
+		//this.panel.add(rightContent);
 	}
 
 	public void start() {
